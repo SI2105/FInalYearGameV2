@@ -53,3 +53,6 @@ TagManager:
   - name: Character
     uniqueID: 2535285447
     locked: 0
+  - name: OverCharacter
+    uniqueID: 100889775
+    locked: 0
