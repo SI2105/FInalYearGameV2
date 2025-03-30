@@ -14,7 +14,7 @@ public class Dialogue : MonoBehaviour
     // Writing speed
     public float writingSpeed;
 
-    // Index on dialogue
+    // Index on quiz
     private int index;
 
     // Character index
@@ -65,7 +65,7 @@ public class Dialogue : MonoBehaviour
         // Reset the character index
         charIndex = 0;
 
-        // Clear the dialogue text through UIManager
+        // Clear the quiz text through UIManager
         UIManager.Instance.ClearDialogueText();
 
         // Start writing
@@ -136,12 +136,12 @@ public class Dialogue : MonoBehaviour
             // Check if we are in the scope of dialogues List
             if (index < dialogues.Count)
             {
-                // If so fetch the next dialogue
+                // If so fetch the next quiz
                 GetDialogue(index);
             }
             else
             {
-                // If not end the dialogue process
+                // If not end the quiz process
                 ToggleIndicator(true);
                 EndDialogue();
             }

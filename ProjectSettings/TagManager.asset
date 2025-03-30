@@ -50,6 +50,9 @@ TagManager:
   - name: Foreground1
     uniqueID: 512302457
     locked: 0
+  - name: Ground
+    uniqueID: 3038106863
+    locked: 0
   - name: Character
     uniqueID: 2535285447
     locked: 0
