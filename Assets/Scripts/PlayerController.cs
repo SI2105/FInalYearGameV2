@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
+    private bool inputsEnabled = true;
    
     SpriteRenderer sprite;
     [Header("Movement")]
@@ -75,6 +76,10 @@ public class PlayerController : MonoBehaviour
  
     public void Move(InputAction.CallbackContext context) {
 
+        if (!inputsEnabled)
+        {
+            return;
+        }
         //Movement Input Action
         horizontalmovement = context.ReadValue<Vector2>().x;
 
@@ -90,6 +95,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext context) {
+
+        if (!inputsEnabled) {
+            return;
+        }
         if (isGrounded()){
             if (context.performed)
             {
@@ -124,6 +133,13 @@ public class PlayerController : MonoBehaviour
         else {
             rigidbody2d.gravityScale = gravity;
         }
+    }
+
+    public void enableInput() {
+        inputsEnabled = true;
+    }
+    public void disableInput() { 
+        inputsEnabled = false;
     }
     
 }

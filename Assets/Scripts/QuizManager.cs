@@ -17,7 +17,7 @@ public class QuizManager : MonoBehaviour
     {
         currentQuiz = quiz;
         questionIndex = 0;
-        gameObject.SetActive(true); // Enable the quiz UI
+        gameObject.SetActive(true); 
         DisplayQuestion();
     }
 

@@ -6,13 +6,19 @@ public class TerminalTrigger : MonoBehaviour
 {
     public Quiz quiz;
     private bool playerDetected;
+    public int objectiveIndex;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            playerDetected = true;
-            quiz.ToggleIndicator(true);
+            if (ObjectiveManager.Instance.currentSection == objectiveIndex && ObjectiveManager.Instance.dialogueCompleted)
+            {
+                playerDetected = true;
+                quiz.ToggleIndicator(true);
+            }
+
+            
         }
     }
 
@@ -29,7 +35,14 @@ public class TerminalTrigger : MonoBehaviour
     {
         if (playerDetected && Input.GetKeyDown(KeyCode.E))
         {
-            quiz.StartQuiz();
+            if (ObjectiveManager.Instance.currentSection == objectiveIndex && ObjectiveManager.Instance.dialogueCompleted)
+            {
+                quiz.StartQuiz();
+            }
+            else
+            {
+                UIManager.Instance.SetObjectiveText("You must talk to the NPC first!");
+            }
         }
     }
 }

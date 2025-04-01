@@ -6,15 +6,16 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
-   
-    private Dictionary<string, QuizScore> quizScores = new Dictionary<string, QuizScore>();
 
+    private Dictionary<string, QuizScore> quizScores = new Dictionary<string, QuizScore>();
+    public int overallScore { get; private set; }
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            
+            overallScore = 0;
+
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -22,6 +23,13 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void addOverallScore(int points) {
+        overallScore += points;
+        GameManager.Instance.updatePointText();
+
+    }
+
 
     // Store or update a quiz score
     public void StoreScore(string quizId, int correct, int incorrect)
@@ -35,6 +43,8 @@ public class ScoreManager : MonoBehaviour
         {
             quizScores.Add(quizId, new QuizScore(correct, incorrect));
         }
+
+ 
     }
 
     public QuizScore GetScore(string quizId)
@@ -45,12 +55,21 @@ public class ScoreManager : MonoBehaviour
         }
         return null;
     }
+
+    public void ResetScores()
+    {
+        quizScores.Clear();
+        overallScore = 0;
+    }
+
+ 
   //Dev
     public void PrintScores()
     {
         foreach (var pair in quizScores)
         {
             Debug.Log($"Quiz: {pair.Key} | Correct: {pair.Value.correctCount} | Incorrect: {pair.Value.incorrectCount}");
+            Debug.Log($"Overall Score: {overallScore}");    
         }
     }
 }

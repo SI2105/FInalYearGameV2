@@ -81,11 +81,13 @@ public class Dialogue : MonoBehaviour
         // Disable wait for next as well
         waitForNext = false;
 
-        // Stop all IEnumerators
         StopAllCoroutines();
-
-        // Hide the window through UIManager
         UIManager.Instance.HideDialogueWindow();
+
+        if (ObjectiveManager.Instance != null)
+        {
+            ObjectiveManager.Instance.CompleteDialogueObjective();
+        }
     }
 
     // Writing logic

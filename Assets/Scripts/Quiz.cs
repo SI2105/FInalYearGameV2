@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Quiz : MonoBehaviour
 {
-    // Interactable indicator for the quiz (e.g., an icon)
+    
     public GameObject indicator;
 
     // List of questions for this quiz
@@ -92,5 +92,27 @@ public class Quiz : MonoBehaviour
         UIManager.Instance.HideQuizWindow();
         ScoreManager.Instance.StoreScore(gameObject.name, correctCount, incorrectCount);
         ScoreManager.Instance.PrintScores();
+        
+        if (correctCount == questions.Count)
+        {
+            // Mark the quiz objective as complete.
+            if (ObjectiveManager.Instance != null)
+            {
+                ObjectiveManager.Instance.CompleteQuizObjective();
+                UIManager.Instance.ShowAlert("Quiz Passed Sucessfully! \n Please proceed to next objective", 4f);
+            }
+            // Disable access to this terminal.
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            if (ObjectiveManager.Instance != null)
+            {
+               UIManager.Instance.ShowAlert("Quiz not passed. Please try again.\n Your Results: \n Correct: " + correctCount + "\n Incorrect: " + incorrectCount , 4f);
+            }
+        }
+
+        correctCount = 0;
+        incorrectCount = 0;
     }
 }
