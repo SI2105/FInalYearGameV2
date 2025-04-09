@@ -7,6 +7,7 @@ public class DialogueTrigger : MonoBehaviour
     public Dialogue dialogue;
     private bool playerDetected;
     public int objectiveIndex;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
 

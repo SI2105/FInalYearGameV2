@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     private ObjectiveManager objectiveManager;
     private ScoreManager scoreManager;
+    [SerializeField] public string PlayerName;
 
     //[Header("Leaderboard Panel")]
     //[SerializeField] private GameObject leaderboardPanel;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         scoreManager = ScoreManager.Instance;
         objectiveManager = ObjectiveManager.Instance;
         updatePointText();
+        LeaderboardManager.Instance.UpdatePlayerScore(PlayerName, 0);
     }
 
     public void updatePointText()

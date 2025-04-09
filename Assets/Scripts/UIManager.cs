@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 
@@ -72,6 +73,20 @@ public class UIManager : MonoBehaviour
             menuButtonImage = menuPanel.transform.GetChild(0).GetComponent<Image>();
         }
 
+        if(leaderboardPanel != null)
+        {
+            leaderboardPanel.SetActive(false);
+            leaderboardNameText = leaderboardPanel.transform.GetChild(0).GetComponent<TMP_Text>();
+            leaderboardScoreText = leaderboardPanel.transform.GetChild(1).GetComponent<TMP_Text>();
+        }
+
+        if (leaderboardButton != null) {
+           
+            leaderboardButton.gameObject.SetActive(false);
+            leaderboardButton.onClick.AddListener(ToggleLeaderboard);
+            
+        }
+
 
     }
 
@@ -138,6 +153,10 @@ public class UIManager : MonoBehaviour
     }
 
 
+
+
+
+    #region Quiz
     [Header("Quiz")]
     [SerializeField] private GameObject quizWindow;
 
@@ -149,9 +168,32 @@ public class UIManager : MonoBehaviour
         get { return quizWindow; }
         set { quizWindow = value; }
     }
+    [SerializeField] private GameObject correctFeedbackImage;
+    [SerializeField] private GameObject incorrectFeedbackImage;
 
-    
-    #region Quiz Methods
+    public void ShowCorrectFeedback(float duration)
+    {
+        if (correctFeedbackImage != null)
+        {
+            correctFeedbackImage.SetActive(true);
+            StartCoroutine(HideFeedbackAfterDelay(correctFeedbackImage, duration));
+        }
+    }
+
+    public void ShowIncorrectFeedback(float duration)
+    {
+        if (incorrectFeedbackImage != null)
+        {
+            incorrectFeedbackImage.SetActive(true);
+            StartCoroutine(HideFeedbackAfterDelay(incorrectFeedbackImage, duration));
+        }
+    }
+
+    private IEnumerator HideFeedbackAfterDelay(GameObject feedbackObj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        feedbackObj.SetActive(false);
+    }
     public void ShowQuizWindow()
     {
         if (quizWindow != null)
@@ -159,6 +201,8 @@ public class UIManager : MonoBehaviour
             quizWindow.SetActive(true);
             objectiveWindow.SetActive(false);
             PointsWindow.SetActive(false);
+            correctFeedbackImage.SetActive(false);
+            incorrectFeedbackImage.SetActive(false);
         }
     }
 
@@ -402,8 +446,75 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.player.enableInput();
         PointsWindow.SetActive(true);
         objectiveWindow.SetActive(true);
+        leaderboardButton.gameObject.SetActive(true);
         ShowAlert(welcomeMessage,2f);
         
+    }
+    #endregion
+
+
+    #region Leaderboard
+    [SerializeField] private GameObject leaderboardPanel;
+    [SerializeField] private TMP_Text leaderboardNameText;
+    [SerializeField] private TMP_Text leaderboardScoreText;
+    [SerializeField] private Button leaderboardButton;
+
+    // Show the leaderboard panel.
+    public void ShowLeaderboard()
+    {
+        if (leaderboardPanel != null)
+        {
+            leaderboardPanel.SetActive(true);
+        }
+    }
+
+    // Hide the leaderboard panel.
+    public void HideLeaderboard()
+    {
+        if (leaderboardPanel != null)
+        {
+            leaderboardPanel.SetActive(false);
+        }
+    }
+
+    // Set the leaderboard score text.
+    public void SetLeaderboardScoreText(string text)
+    {
+        if (leaderboardScoreText != null)
+        {
+            leaderboardScoreText.text = text;
+        }
+    }
+    public void SetLeaderboardNameText(string text)
+    {
+        if (leaderboardNameText != null)
+        {
+            leaderboardNameText.text = text;
+        }
+    }
+
+    // Get the leaderboard score text.
+    public string GetLeaderboardScoreText()
+    {
+        return leaderboardScoreText != null ? leaderboardScoreText.text : string.Empty;
+    }
+
+    public bool IsLeaderboardVisible()
+    {
+        return leaderboardPanel != null && leaderboardPanel.activeSelf;
+    }
+
+    public void ToggleLeaderboard()
+    {
+        if (IsLeaderboardVisible())
+        {
+            HideLeaderboard();
+        }
+        else
+        {
+            LeaderboardManager.Instance.UpdateLeaderboardDisplay();
+            ShowLeaderboard();
+        }
     }
     #endregion
 }

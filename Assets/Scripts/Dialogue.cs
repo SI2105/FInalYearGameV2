@@ -7,24 +7,20 @@ public class Dialogue : MonoBehaviour
 {
     // Indicator
     public GameObject indicator;
-
     // Dialogues list
     public List<string> dialogues;
-
     // Writing speed
     public float writingSpeed;
-
     // Index on quiz
     private int index;
-
     // Character index
     private int charIndex;
-
     // Started boolean
     private bool started;
-
     // Wait for next boolean
     private bool waitForNext;
+
+
 
 
 

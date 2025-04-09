@@ -75,12 +75,20 @@ public class Quiz : MonoBehaviour
         if (answerIndex == currentQuestion.correctAnswerIndex)
         {
             correctCount++;
+            UIManager.Instance.ShowCorrectFeedback(0.5f);
         }
         else
         {
             incorrectCount++;
+            UIManager.Instance.ShowIncorrectFeedback(0.5f);
         }
+        StartCoroutine(ProceedAfterFeedback(0.5f));
+        
+    }
 
+    private IEnumerator ProceedAfterFeedback(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         currentQuestionIndex++;
         DisplayQuestion();
     }

@@ -27,6 +27,7 @@ public class ScoreManager : MonoBehaviour
     public void addOverallScore(int points) {
         overallScore += points;
         GameManager.Instance.updatePointText();
+        LeaderboardManager.Instance.UpdatePlayerScore(GameManager.Instance.PlayerName, overallScore);
 
     }
 
@@ -42,6 +43,7 @@ public class ScoreManager : MonoBehaviour
         else
         {
             quizScores.Add(quizId, new QuizScore(correct, incorrect));
+            
         }
 
  
