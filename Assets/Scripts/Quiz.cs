@@ -16,6 +16,10 @@ public class Quiz : MonoBehaviour
 
     private int correctCount = 0;
     private int incorrectCount = 0;
+
+    private int failCount = 0;
+    //Locked state for if quiz has been failed multiple times 
+    private bool locked = false;
     private void Awake()
     {
         ToggleIndicator(false);
@@ -114,6 +118,7 @@ public class Quiz : MonoBehaviour
         }
         else
         {
+            failCount++;
             if (ObjectiveManager.Instance != null)
             {
                UIManager.Instance.ShowAlert("Quiz not passed. Please try again.\n Your Results: \n Correct: " + correctCount + "\n Incorrect: " + incorrectCount , 4f);

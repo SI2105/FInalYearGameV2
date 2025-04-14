@@ -1376,7 +1376,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.000511, y: -1.691, z: -10}
+  m_LocalPosition: {x: -19.42732, y: -1.6940299, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1520,7 +1520,7 @@ PrefabInstance:
       objectReference: {fileID: -129739135, guid: 94f69fcc71a203b40977932641fa426f, type: 3}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
       propertyPath: dialogues.Array.size
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
       propertyPath: dialogues.Array.data[0]
@@ -1575,56 +1575,62 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
       propertyPath: dialogues.Array.data[9]
-      value: 'But how do these AI services actually work? They do it in two main
-        phases: Analysis and Prediction.'
+      value: But how do these AI services actually work? During the Analysis phase,
+        AI services ingest vast amounts of data.
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
       propertyPath: dialogues.Array.data[10]
-      value: "During the Analysis phase, AI services ingest vast amounts of data.
-        Imagine it scanning through every guest review and service record we have\u2014organizing
-        and sorting this data in ways that would have seemed impossible just a few
-        years ago.But how do these AI services actually work? They do it in two main
-        phases: Analysis and Prediction."
+      value: "Imagine it scanning through every guest review and service record we
+        have\u2014organizing and sorting this data in ways that would have seemed
+        impossible just a few years ago.But how do these AI services actually work?
+        They do it in two main phases: Analysis and Prediction."
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
       propertyPath: dialogues.Array.data[11]
+      value: "During the Analysis phase, AI services ingest vast amounts of data.
+        Imagine it scanning through every guest review and service record we have\u2014organizing
+        and sorting this data in ways that would have seemed impossible just a few
+        years ago."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
+      propertyPath: dialogues.Array.data[12]
       value: "Then comes the Prediction phase. After analyzing all that data, the
         system can forecast what might happen next\u2014like predicting a surge in
         room service orders during a big conference."
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
-      propertyPath: dialogues.Array.data[12]
+      propertyPath: dialogues.Array.data[13]
       value: In short, based on its analysis, it might say, 'Based on these patterns,
         it's likely that there'll be high demand for a certain service soon.
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
-      propertyPath: dialogues.Array.data[13]
+      propertyPath: dialogues.Array.data[14]
       value: "This combination of analysis and prediction can have an enormous impact
         on how efficiently a business runs\u2014even in a hotel like ours."
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
-      propertyPath: dialogues.Array.data[14]
+      propertyPath: dialogues.Array.data[15]
       value: "So, while artificial intelligence is designed to mimic human thought
         and take over tasks, augmented intelligence\u2014where machines support us
         rather than replace us\u2014is what really brings out the best in both worlds."
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
-      propertyPath: dialogues.Array.data[15]
+      propertyPath: dialogues.Array.data[16]
       value: Take a moment to compare that analysis and prediction with your own
         gut feeling. Surprised how much these simple actions can change outcomes?
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
-      propertyPath: dialogues.Array.data[16]
+      propertyPath: dialogues.Array.data[17]
       value: "That\u2019s the power of AI at work\u2014whether you\u2019re sorting
         groceries or ensuring a smooth stay here at our hotel."
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
-      propertyPath: dialogues.Array.data[17]
+      propertyPath: dialogues.Array.data[18]
       value: I hope this gives you a clearer picture of what AI does and how it might
         even make our everyday services more efficient.
       objectReference: {fileID: 0}
     - target: {fileID: 5783291743942086863, guid: f96967fac1a06cd45a80afe45376c596, type: 3}
-      propertyPath: dialogues.Array.data[18]
+      propertyPath: dialogues.Array.data[19]
       value: Now upload the knowledge to the terminal to help our great city. Come
         back if you need a refresher.
       objectReference: {fileID: 0}
@@ -58427,7 +58433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8938816203190495493, guid: 447e752358a4f644f8d5aa8ce02b2baa, type: 3}
       propertyPath: questions.Array.data[1].answers.Array.data[1]
-      value: t ingests large amounts of data and applies mathematical calculations
+      value: It ingests large amounts of data and applies mathematical calculations
         to organize it
       objectReference: {fileID: 0}
     - target: {fileID: 8938816203190495493, guid: 447e752358a4f644f8d5aa8ce02b2baa, type: 3}
@@ -59271,7 +59277,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.15, y: 25}
+  m_AnchoredPosition: {x: 5.15, y: 37}
   m_SizeDelta: {x: 594.2997, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027387932
@@ -59321,12 +59327,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.61
+  m_fontSize: 20
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 19.61
-  m_fontSizeMax: 36
+  m_fontSizeMin: 20
+  m_fontSizeMax: 45
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -59339,7 +59345,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 2
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -59357,7 +59363,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -66.16189}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -81295,6 +81301,7 @@ MonoBehaviour:
   - dialogueObjective: Talk to Mayor Jake to discuss your work
     quizObjective: 
     isFinalSection: 1
+  currentSection: 0
 --- !u!1 &1605793160
 GameObject:
   m_ObjectHideFlags: 0
@@ -82028,7 +82035,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 420db1b41b9cfcd49b50aeda75e945b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0ead18941f26d5643a4431878616a043, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -84126,7 +84133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8938816203190495493, guid: 447e752358a4f644f8d5aa8ce02b2baa, type: 3}
       propertyPath: questions.Array.data[0].answers.Array.data[3]
-      value: dominant
+      value: Dominant
       objectReference: {fileID: 0}
     - target: {fileID: 8938816203190495493, guid: 447e752358a4f644f8d5aa8ce02b2baa, type: 3}
       propertyPath: questions.Array.data[1].answers.Array.data[0]

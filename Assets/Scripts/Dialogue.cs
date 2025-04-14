@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class Dialogue : MonoBehaviour
 {
-    // Indicator
+  
     public GameObject indicator;
-    // Dialogues list
+   
     public List<string> dialogues;
-    // Writing speed
+    
     public float writingSpeed;
     // Index on quiz
     private int index;
     // Character index
     private int charIndex;
-    // Started boolean
+    
     private bool started;
-    // Wait for next boolean
+   
     private bool waitForNext;
+
+    private bool skipWriting;
 
 
 
@@ -46,7 +48,7 @@ public class Dialogue : MonoBehaviour
      
         UIManager.Instance.ShowDialogueWindow();
 
-        // Hide the indicator
+       
         ToggleIndicator(false);
 
      
@@ -61,11 +63,12 @@ public class Dialogue : MonoBehaviour
         // Reset the character index
         charIndex = 0;
 
-        // Clear the quiz text through UIManager
+        //Clears the quiz text through UIManager
         UIManager.Instance.ClearDialogueText();
 
-        // Start writing
+        skipWriting = false;
         StartCoroutine(Writing());
+        
     }
 
     // End Dialogue
@@ -89,59 +92,55 @@ public class Dialogue : MonoBehaviour
     // Writing logic
     IEnumerator Writing()
     {
-        yield return new WaitForSeconds(writingSpeed);
-
-        UIManager.Instance.HideEnter(); 
-
         string currentDialogue = dialogues[index];
 
-
-        
-
-        UIManager.Instance.dialogueText.text += currentDialogue[charIndex];
-  
-
-        // Increase the character index 
-        charIndex++;
-
-        // Make sure you have reached the end of the sentence
-        if (charIndex < currentDialogue.Length)
+        // Continue writing characters until the end
+        while (charIndex < currentDialogue.Length)
         {
-            // Wait x seconds 
+            if (skipWriting)
+            {
+                // Skip rest of typing: display full dialogue immediately
+                UIManager.Instance.dialogueText.text = currentDialogue;
+                charIndex = currentDialogue.Length;
+                break;
+            }
+
+            UIManager.Instance.dialogueText.text += currentDialogue[charIndex];
+            charIndex++;
             yield return new WaitForSeconds(writingSpeed);
+        }
 
-            // Restart the same process
-            StartCoroutine(Writing());
-        }
-        else
-        {
-            // End this sentence and wait for the next one
-            waitForNext = true;
-            UIManager.Instance.ShowEnter();
-        }
+        // Once complete, allow moving to the next dialogue line
+        waitForNext = true;
+        UIManager.Instance.ShowEnter();
     }
 
     private void Update()
     {
-        if (!started)
+         if (!started)
             return;
 
-        if (waitForNext && Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            waitForNext = false;
-            index++;
-
-            // Check if we are in the scope of dialogues List
-            if (index < dialogues.Count)
+            if (!waitForNext)
             {
-                // If so fetch the next quiz
-                GetDialogue(index);
+                //If text is still being written, skip to full text
+                skipWriting = true;
             }
             else
             {
-                // If not end the quiz process
-                ToggleIndicator(true);
-                EndDialogue();
+                // Otherwise, move to the next dialogue
+                waitForNext = false;
+                index++;
+                if (index < dialogues.Count)
+                {
+                    GetDialogue(index);
+                }
+                else
+                {
+                    ToggleIndicator(true);
+                    EndDialogue();
+                }
             }
         }
     }
