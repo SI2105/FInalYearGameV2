@@ -82,7 +82,7 @@ public class LeaderboardManager : MonoBehaviour
             string scoreLine;
             if (entry.playerName == currentPlayerName)
             {
-                // Highlight the current player's entry (using yellow bold formatting).
+                
                 nameLine = "<color=green><b>" + entry.playerName + "</b></color>";
                 scoreLine = "<color=green><b>" + entry.highScore + "</b></color>";
             }

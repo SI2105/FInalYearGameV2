@@ -105,15 +105,10 @@ public class PlayerController : MonoBehaviour
                 rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpforce);
                 _animator.SetBool("IsJumping", true);
             }
-            else if (context.canceled){
-                rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.velocity.y * jumpforce/2);
-           
-
-            }
         }
     }
 
-    private bool isGrounded() {
+    public bool isGrounded() {
         if (Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, groundLayer)) {
             return true;
         }
@@ -137,9 +132,11 @@ public class PlayerController : MonoBehaviour
 
     public void enableInput() {
         inputsEnabled = true;
+        
     }
     public void disableInput() { 
         inputsEnabled = false;
+        horizontalmovement = 0;
     }
     
 }

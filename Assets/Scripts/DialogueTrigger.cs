@@ -12,15 +12,8 @@ public class DialogueTrigger : MonoBehaviour
     {
 
         if (other.tag == "Player") {
-            //if (ObjectiveManager.Instance.currentSection == objectiveIndex)
-            //{
-            //    playerDetected = true;
-            //    dialogue.ToggleIndicator(playerDetected);
-            //}
             playerDetected = true;
             dialogue.ToggleIndicator(playerDetected);
-
-
         }
         
     }

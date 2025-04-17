@@ -11,7 +11,6 @@ public class Dialogue : MonoBehaviour
     public List<string> dialogues;
     
     public float writingSpeed;
-    // Index on quiz
     private int index;
     // Character index
     private int charIndex;
@@ -42,7 +41,7 @@ public class Dialogue : MonoBehaviour
         if (started)
             return;
 
-       
+        GameManager.Instance.player.disableInput();
         started = true;
 
      
@@ -82,6 +81,7 @@ public class Dialogue : MonoBehaviour
 
         StopAllCoroutines();
         UIManager.Instance.HideDialogueWindow();
+        GameManager.Instance.player.enableInput();
 
         if (ObjectiveManager.Instance != null)
         {
@@ -106,6 +106,7 @@ public class Dialogue : MonoBehaviour
             }
 
             UIManager.Instance.dialogueText.text += currentDialogue[charIndex];
+            UIManager.Instance.updateIndexText(index + 1, dialogues.Count);
             charIndex++;
             yield return new WaitForSeconds(writingSpeed);
         }

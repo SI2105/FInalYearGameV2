@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [Header("Dialogue")]
     [SerializeField] private GameObject dialogueWindow;
     public TMP_Text dialogueText;
+    public TMP_Text indexText;
     private GameObject enterButton;
 
 
@@ -35,7 +36,9 @@ public class UIManager : MonoBehaviour
         {
             dialogueText = dialogueWindow.GetComponentInChildren<TMP_Text>();
             dialogueWindow.SetActive(false);
+            
             enterButton = dialogueWindow.transform.GetChild(1).gameObject;
+            indexText = dialogueWindow.transform.GetChild(2).GetComponent<TMP_Text>();
         }
 
         if (quizWindow != null) {
@@ -125,10 +128,17 @@ public class UIManager : MonoBehaviour
         if (dialogueWindow != null)
         {
             dialogueWindow.SetActive(true);
+           
         }
-        dialogueText.text = "OPEN";
+        
     }
+    public void updateIndexText(int current, int index) {
+        if (indexText != null)
+        {
+            indexText.text = current + "/" + index;
+        }
 
+    }
     
     public void HideDialogueWindow()
     {
@@ -163,6 +173,15 @@ public class UIManager : MonoBehaviour
     [Header("Quiz Elements")]
     private TMP_Text quizQuestionText;
     [SerializeField] private Button[] answerButtons;
+    [SerializeField] private TMP_Text quizTimerText;
+
+    public void setQuizTimerText(string text) {
+        if (quizTimerText != null)
+        {
+            quizTimerText.text = text;
+        }   
+    }
+    
     public GameObject QuizWindow
     {
         get { return quizWindow; }
@@ -314,6 +333,7 @@ public class UIManager : MonoBehaviour
             EndGameWindow.SetActive(true);
             PointsWindow.SetActive(false);
             objectiveWindow.SetActive(false);
+            leaderboardButton.gameObject.SetActive(false);
     }
 
     public void HideEndGameWindow()
@@ -395,7 +415,18 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator HideAlertAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        float elapsed = 0f;
+        while (elapsed < delay)
+        {
+            if (IsDialogueWindowVisible())
+            {
+                alertPanel.SetActive(false);
+                alertCoroutine = null;
+                yield break; // Exit the coroutine early
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
         alertPanel.SetActive(false);
         alertCoroutine = null;
     }
@@ -447,7 +478,7 @@ public class UIManager : MonoBehaviour
         PointsWindow.SetActive(true);
         objectiveWindow.SetActive(true);
         leaderboardButton.gameObject.SetActive(true);
-        ShowAlert(welcomeMessage,2f);
+        ShowAlert(welcomeMessage,6f);
         
     }
     #endregion

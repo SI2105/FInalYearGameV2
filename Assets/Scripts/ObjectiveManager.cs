@@ -63,8 +63,7 @@ public class ObjectiveManager : MonoBehaviour
 
         else {
             UIManager.Instance.ShowAlert(sections[currentSection].dialogueObjective + " Objective Completed! Find and upload your knowledge to the terminal", 4f);
-            UIManager.Instance.ObjectiveText.text = "Current Objectives:\n" +
-                "Quiz: " + sections[currentSection].quizObjective;
+            UIManager.Instance.ObjectiveText.text = "Quiz: " + sections[currentSection].quizObjective;
         }
         
     }
@@ -97,7 +96,7 @@ public class ObjectiveManager : MonoBehaviour
         else if (currentSection < sections.Count)
         {
 
-            UIManager.Instance.ObjectiveText.text = "Current Objectives:\n";
+            UIManager.Instance.ObjectiveText.text = "";
             if (!dialogueCompleted)
             {
                 UIManager.Instance.ObjectiveText.text += "Talk to NPC: " + sections[currentSection].dialogueObjective + "\n";
