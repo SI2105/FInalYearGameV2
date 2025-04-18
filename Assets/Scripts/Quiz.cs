@@ -6,6 +6,7 @@ using UnityEngine;
 public class Quiz : MonoBehaviour
 {
     public GameObject indicator;
+    public GameObject lockIndicator;
     public List<Question> questions;
 
     [Header("Timer")]
@@ -24,14 +25,19 @@ public class Quiz : MonoBehaviour
 
     private void Awake()
     {
-        ToggleIndicator(false);
+        toggleIndicator(false);
+        toggleLockIndicator(false);
     }
 
-    public void ToggleIndicator(bool show)
+    public void toggleIndicator(bool show)
     {
         if (indicator != null) indicator.SetActive(show);
     }
 
+    public void toggleLockIndicator(bool show)
+    {
+        if (lockIndicator != null) lockIndicator.SetActive(show);
+    }
     public void StartQuiz()
     {
         if (started) return;
@@ -43,7 +49,7 @@ public class Quiz : MonoBehaviour
         currentQuestionIndex = 0;
 
         UIManager.Instance.ShowQuizWindow();
-        ToggleIndicator(false);
+        toggleIndicator(false);
         DisplayQuestion();
     }
 

@@ -90,6 +90,16 @@ public class UIManager : MonoBehaviour
             
         }
 
+        if (helpPanel != null)
+        {
+            helpPanel.SetActive(false);
+        }
+
+        if (helpButton != null) { 
+            helpButton.gameObject.SetActive(false); 
+            helpButton.onClick.AddListener(toggleHelpPanel);
+        }
+
 
     }
 
@@ -334,6 +344,7 @@ public class UIManager : MonoBehaviour
             PointsWindow.SetActive(false);
             objectiveWindow.SetActive(false);
             leaderboardButton.gameObject.SetActive(false);
+            helpButton.gameObject.SetActive(false);
     }
 
     public void HideEndGameWindow()
@@ -435,7 +446,7 @@ public class UIManager : MonoBehaviour
     [Header("Menu")]
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private float menuFadeDuration = 0.5f;
-    [SerializeField] private string welcomeMessage = "Welcome to SkillsCity, please speak to our esteemed mayor to learn more about your task";
+    [SerializeField] private string welcomeMessage;
     private Image menuPanelImage;
     private Image menuButtonImage; 
     public void OnStartButtonClicked()
@@ -478,11 +489,26 @@ public class UIManager : MonoBehaviour
         PointsWindow.SetActive(true);
         objectiveWindow.SetActive(true);
         leaderboardButton.gameObject.SetActive(true);
+        helpButton.gameObject.SetActive(true);
         ShowAlert(welcomeMessage,6f);
         
     }
     #endregion
+    #region Help Button
+    [SerializeField] private GameObject helpPanel;
+    [SerializeField] private Button helpButton;
 
+    
+    public void toggleHelpPanel()
+    {
+        if (helpPanel != null)
+        {
+            helpPanel.SetActive(!helpPanel.activeSelf);
+        }
+    }
+
+
+    #endregion
 
     #region Leaderboard
     [SerializeField] private GameObject leaderboardPanel;

@@ -15,7 +15,11 @@ public class TerminalTrigger : MonoBehaviour
             if (ObjectiveManager.Instance.currentSection == objectiveIndex && ObjectiveManager.Instance.dialogueCompleted)
             {
                 playerDetected = true;
-                quiz.ToggleIndicator(true);
+                quiz.toggleIndicator(true);
+            }
+            else {
+                playerDetected = true;
+                quiz.toggleLockIndicator(true);
             }
 
             
@@ -27,7 +31,8 @@ public class TerminalTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerDetected = false;
-            quiz.ToggleIndicator(false);
+            quiz.toggleIndicator(false);
+            quiz.toggleLockIndicator(false);
         }
     }
 
@@ -41,7 +46,7 @@ public class TerminalTrigger : MonoBehaviour
             }
             else
             {
-                UIManager.Instance.SetObjectiveText("You must talk to the NPC first!");
+                UIManager.Instance.ShowAlert("You must talk to the NPC first!", 2f);
             }
         }
     }
