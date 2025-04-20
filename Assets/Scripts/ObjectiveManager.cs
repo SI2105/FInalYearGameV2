@@ -85,7 +85,7 @@ public class ObjectiveManager : MonoBehaviour
     
     public void UpdateObjectiveText(string message = "")
     {
-        print(UIManager.Instance);
+       
         if (UIManager.Instance.ObjectiveText == null)
             return;
 

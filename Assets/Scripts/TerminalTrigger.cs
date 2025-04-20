@@ -7,6 +7,7 @@ public class TerminalTrigger : MonoBehaviour
     public Quiz quiz;
     private bool playerDetected;
     public int objectiveIndex;
+    
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -17,12 +18,16 @@ public class TerminalTrigger : MonoBehaviour
                 playerDetected = true;
                 quiz.toggleIndicator(true);
             }
-            else {
+            else if ((ObjectiveManager.Instance.currentSection == objectiveIndex && !ObjectiveManager.Instance.dialogueCompleted) || ObjectiveManager.Instance.currentSection < objectiveIndex)
+            {
                 playerDetected = true;
                 quiz.toggleLockIndicator(true);
             }
 
-            
+            else if (quiz.Iscomplete) {
+                playerDetected = true;
+                quiz.toggleCompleteIndicator(true);
+            }
         }
     }
 
@@ -33,6 +38,7 @@ public class TerminalTrigger : MonoBehaviour
             playerDetected = false;
             quiz.toggleIndicator(false);
             quiz.toggleLockIndicator(false);
+            quiz.toggleCompleteIndicator(false);
         }
     }
 
@@ -40,13 +46,22 @@ public class TerminalTrigger : MonoBehaviour
     {
         if (playerDetected && Input.GetKeyDown(KeyCode.E))
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance.click);
             if (ObjectiveManager.Instance.currentSection == objectiveIndex && ObjectiveManager.Instance.dialogueCompleted)
             {
                 quiz.StartQuiz();
             }
-            else
+            else if(ObjectiveManager.Instance.currentSection == objectiveIndex)
             {
                 UIManager.Instance.ShowAlert("You must talk to the NPC first!", 2f);
+            }
+            else if (ObjectiveManager.Instance.currentSection < objectiveIndex)
+            {
+                UIManager.Instance.ShowAlert("You must complete the previous section first!", 2f);
+            }
+            else if (quiz.Iscomplete)
+            {
+                UIManager.Instance.ShowAlert("You have already completed this Quiz!", 2f);
             }
         }
     }

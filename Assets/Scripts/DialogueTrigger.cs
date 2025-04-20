@@ -32,6 +32,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (playerDetected && Input.GetKeyDown(KeyCode.E))
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance.click);
             if (ObjectiveManager.Instance.currentSection == objectiveIndex)
             {
                 dialogue.StartDialogue();

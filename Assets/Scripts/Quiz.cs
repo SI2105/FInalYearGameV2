@@ -7,6 +7,7 @@ public class Quiz : MonoBehaviour
 {
     public GameObject indicator;
     public GameObject lockIndicator;
+    public GameObject completeIndicator;
     public List<Question> questions;
 
     [Header("Timer")]
@@ -23,10 +24,22 @@ public class Quiz : MonoBehaviour
     float questionTimeLeft;
     float totalTimeUsed;
 
+    private float normalMusicSpeed = 1f;
+    private float quizMusicSpeed = 1.25f;
+
+    public bool Iscomplete;
+
     private void Awake()
     {
         toggleIndicator(false);
         toggleLockIndicator(false);
+        toggleCompleteIndicator(false);
+
+    }
+
+    private void Start()
+    {
+        Iscomplete = false;
     }
 
     public void toggleIndicator(bool show)
@@ -38,6 +51,10 @@ public class Quiz : MonoBehaviour
     {
         if (lockIndicator != null) lockIndicator.SetActive(show);
     }
+
+    public void toggleCompleteIndicator(bool show) {
+        if (completeIndicator != null) completeIndicator.SetActive(show);
+    }
     public void StartQuiz()
     {
         if (started) return;
@@ -48,6 +65,10 @@ public class Quiz : MonoBehaviour
         totalTimeUsed = 0f;
         currentQuestionIndex = 0;
 
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.GraduallySpeedUpMusic(quizMusicSpeed, 2f); // Speed up over 2 seconds
+        }
         UIManager.Instance.ShowQuizWindow();
         toggleIndicator(false);
         DisplayQuestion();
@@ -132,6 +153,10 @@ public class Quiz : MonoBehaviour
         GameManager.Instance.player.enableInput();
 
         ScoreManager.Instance.StoreScore(gameObject.name, correctCount, incorrectCount);
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.GraduallySlowDownMusic(normalMusicSpeed, 2f); // Slow down over 2 seconds
+        }
 
         if (correctCount == questions.Count)
         {
@@ -140,7 +165,8 @@ public class Quiz : MonoBehaviour
             ScoreManager.Instance.addOverallScore(bonus);
             ObjectiveManager.Instance?.CompleteQuizObjective();
             UIManager.Instance.ShowAlert($"Quiz passed!\nBonus +{bonus} pts", 4f);
-            gameObject.SetActive(false);
+            Iscomplete = true;
+            UIManager.Instance.HideQuizWindow();
         }
         else
         {

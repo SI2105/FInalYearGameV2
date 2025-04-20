@@ -43,7 +43,6 @@ public class ScoreManager : MonoBehaviour
         else
         {
             quizScores.Add(quizId, new QuizScore(correct, incorrect));
-            
         }
 
  
@@ -65,13 +64,5 @@ public class ScoreManager : MonoBehaviour
     }
 
  
-  //Dev
-    public void PrintScores()
-    {
-        foreach (var pair in quizScores)
-        {
-            Debug.Log($"Quiz: {pair.Key} | Correct: {pair.Value.correctCount} | Incorrect: {pair.Value.incorrectCount}");
-            Debug.Log($"Overall Score: {overallScore}");    
-        }
-    }
+  
 }

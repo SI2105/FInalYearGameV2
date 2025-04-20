@@ -102,12 +102,14 @@ public class Dialogue : MonoBehaviour
                 // Skip rest of typing: display full dialogue immediately
                 UIManager.Instance.dialogueText.text = currentDialogue;
                 charIndex = currentDialogue.Length;
+                
                 break;
             }
 
             UIManager.Instance.dialogueText.text += currentDialogue[charIndex];
             UIManager.Instance.updateIndexText(index + 1, dialogues.Count);
             charIndex++;
+            
             yield return new WaitForSeconds(writingSpeed);
         }
 
@@ -123,10 +125,12 @@ public class Dialogue : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            
             if (!waitForNext)
             {
                 //If text is still being written, skip to full text
                 skipWriting = true;
+                AudioManager.instance.PlaySFX(AudioManager.instance.click);
             }
             else
             {

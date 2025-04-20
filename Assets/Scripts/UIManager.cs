@@ -17,7 +17,15 @@ public class UIManager : MonoBehaviour
     public TMP_Text indexText;
     private GameObject enterButton;
 
+    private void Start()
+    {
+        if (muteButton != null) { 
+            muteButton.onClick.AddListener(ToggleMute);
 
+            muteIcon.SetActive(false);
+            unmuteIcon.SetActive(true);
+        }
+    }
     private void Awake()
     {
         // Singleton pattern implementation
@@ -138,7 +146,8 @@ public class UIManager : MonoBehaviour
         if (dialogueWindow != null)
         {
             dialogueWindow.SetActive(true);
-           
+            alertPanel.SetActive(false);
+
         }
         
     }
@@ -204,6 +213,7 @@ public class UIManager : MonoBehaviour
     {
         if (correctFeedbackImage != null)
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance.correct);
             correctFeedbackImage.SetActive(true);
             StartCoroutine(HideFeedbackAfterDelay(correctFeedbackImage, duration));
         }
@@ -213,6 +223,7 @@ public class UIManager : MonoBehaviour
     {
         if (incorrectFeedbackImage != null)
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance.wrong);
             incorrectFeedbackImage.SetActive(true);
             StartCoroutine(HideFeedbackAfterDelay(incorrectFeedbackImage, duration));
         }
@@ -232,6 +243,7 @@ public class UIManager : MonoBehaviour
             PointsWindow.SetActive(false);
             correctFeedbackImage.SetActive(false);
             incorrectFeedbackImage.SetActive(false);
+            alertPanel.SetActive(false);
         }
     }
 
@@ -242,6 +254,9 @@ public class UIManager : MonoBehaviour
             quizWindow.SetActive(false);
             objectiveWindow.SetActive(true);
             PointsWindow.SetActive(true);
+            correctFeedbackImage.SetActive(true);
+            incorrectFeedbackImage.SetActive(true);
+            alertPanel.SetActive(true);
         }
     }
 
@@ -442,6 +457,51 @@ public class UIManager : MonoBehaviour
         alertCoroutine = null;
     }
     #endregion
+    #region Mute
+    [Header("Mute")]
+    [SerializeField] private Button muteButton;
+    [SerializeField] private GameObject muteIcon;
+    [SerializeField] private GameObject unmuteIcon;
+
+    private bool isMuted = false;
+
+    public void ToggleMute()
+    {
+        AudioManager.instance.PlaySFX(AudioManager.instance.toggle);
+        isMuted = !isMuted;
+        if (AudioManager.instance != null)
+        {
+            if (isMuted)
+            {
+                AudioManager.instance.MuteMusic();
+            }
+            else
+            {
+                AudioManager.instance.UnmuteMusic();
+            }
+        }
+       
+        UpdateMuteButtonImage();
+    }
+
+    private void UpdateMuteButtonImage()
+    {
+        if (muteButton != null)
+        {
+            if (isMuted)
+            {
+                muteIcon.SetActive(true);
+                unmuteIcon.SetActive(false);
+            }
+
+            else
+            {
+                muteIcon.SetActive(false);
+                unmuteIcon.SetActive(true);
+            }
+        }
+    }
+    #endregion
     #region Menu 
     [Header("Menu")]
     [SerializeField] private GameObject menuPanel;
@@ -451,6 +511,7 @@ public class UIManager : MonoBehaviour
     private Image menuButtonImage; 
     public void OnStartButtonClicked()
     {
+        AudioManager.instance.PlaySFX(AudioManager.instance.click);
         if (menuPanel != null && menuPanelImage != null && menuButtonImage != null)
         {
             StartCoroutine(FadeOutMenuPanel());
@@ -504,6 +565,7 @@ public class UIManager : MonoBehaviour
         if (helpPanel != null)
         {
             helpPanel.SetActive(!helpPanel.activeSelf);
+            AudioManager.instance.PlaySFX(AudioManager.instance.toggle);
         }
     }
 
@@ -530,6 +592,7 @@ public class UIManager : MonoBehaviour
     {
         if (leaderboardPanel != null)
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance.click);
             leaderboardPanel.SetActive(false);
         }
     }
@@ -563,6 +626,7 @@ public class UIManager : MonoBehaviour
 
     public void ToggleLeaderboard()
     {
+        AudioManager.instance.PlaySFX(AudioManager.instance.toggle);
         if (IsLeaderboardVisible())
         {
             HideLeaderboard();
