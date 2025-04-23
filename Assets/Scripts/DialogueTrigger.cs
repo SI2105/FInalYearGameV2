@@ -30,7 +30,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (playerDetected && Input.GetKeyDown(KeyCode.E))
+        if (playerDetected && Input.GetKeyDown(KeyCode.E) && !GameManager.Instance.gameCompleted)
         {
             AudioManager.instance.PlaySFX(AudioManager.instance.click);
             if (ObjectiveManager.Instance.currentSection == objectiveIndex)

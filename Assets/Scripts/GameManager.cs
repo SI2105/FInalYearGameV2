@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private ObjectiveManager objectiveManager;
     private ScoreManager scoreManager;
     [SerializeField] public string PlayerName;
+    public bool gameCompleted = false;
 
     //[Header("Leaderboard Panel")]
     //[SerializeField] private GameObject leaderboardPanel;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         // Call this method when the final dialogue is completed.
         public void GameCompleted()
     {
+        gameCompleted = true;
         UIManager.Instance.ShowEndGameWindow();
         player.disableInput();
 
