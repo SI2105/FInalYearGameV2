@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    //Manages the UI componenets
     public static UIManager Instance { get; private set; }
 
     [Header("Dialogue")]
@@ -538,12 +539,12 @@ public class UIManager : MonoBehaviour
             menuButtonImage.color = buttonColor;
             yield return null;
         }
-        // Ensure alpha is set to zero.
+        //ensure alpha is set to zero.
         panelColor.a = 0f;
         buttonColor.a = 0f;
         menuPanelImage.color = panelColor;
         menuButtonImage.color = buttonColor;
-        // Hide the menu panel.
+        //hide the menu panel.
         menuPanel.SetActive(false);
 
         GameManager.Instance.player.enableInput();
@@ -578,7 +579,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text leaderboardScoreText;
     [SerializeField] private Button leaderboardButton;
 
-    // Show the leaderboard panel.
+   
     public void ShowLeaderboard()
     {
         if (leaderboardPanel != null)
@@ -587,7 +588,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // Hide the leaderboard panel.
+    
     public void HideLeaderboard()
     {
         if (leaderboardPanel != null)
@@ -597,7 +598,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // Set the leaderboard score text.
     public void SetLeaderboardScoreText(string text)
     {
         if (leaderboardScoreText != null)
@@ -613,7 +613,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // Get the leaderboard score text.
     public string GetLeaderboardScoreText()
     {
         return leaderboardScoreText != null ? leaderboardScoreText.text : string.Empty;

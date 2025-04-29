@@ -41,6 +41,7 @@ public class LeaderboardManager : MonoBehaviour
     public void UpdatePlayerScore(string playerName, int score)
     {
         bool found = false;
+        //looks for player
         foreach (var entry in leaderboardEntries)
         {
             if (entry.playerName == playerName)

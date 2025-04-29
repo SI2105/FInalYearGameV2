@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class TerminalTrigger : MonoBehaviour
 {
+    //acts as the trigger between player and the terminal and manages the interactions
     public Quiz quiz;
     private bool playerDetected;
     public int objectiveIndex;
     
-
+    //collider based trigger logic
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

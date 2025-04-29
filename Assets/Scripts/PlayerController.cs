@@ -48,7 +48,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        //Runs every 10 frames(set in unity), as its not necessary to update every frame
+
         rigidbody2d.velocity = new Vector2(horizontalmovement * movespeed, rigidbody2d.velocity.y);
         _animator.SetFloat("xVelocity", Mathf.Abs(rigidbody2d.velocity.x));
         _animator.SetFloat("yVelocity", rigidbody2d.velocity.x);

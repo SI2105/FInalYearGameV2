@@ -67,7 +67,7 @@ public class Quiz : MonoBehaviour
 
         if (AudioManager.instance != null)
         {
-            AudioManager.instance.GraduallySpeedUpMusic(quizMusicSpeed, 2f); // Speed up over 2 seconds
+            AudioManager.instance.GraduallySpeedUpMusic(quizMusicSpeed, 1f); // Speed up over 2 seconds
         }
         UIManager.Instance.ShowQuizWindow();
         toggleIndicator(false);
@@ -76,6 +76,7 @@ public class Quiz : MonoBehaviour
 
     void DisplayQuestion()
     {
+        //when there is no more questions to display
         if (currentQuestionIndex >= questions.Count) { EndQuiz(); return; }
 
         Question q = questions[currentQuestionIndex];
@@ -84,20 +85,22 @@ public class Quiz : MonoBehaviour
 
         for (int i = 0; i < q.answers.Count; i++)
         {
-            int idx = i;
-            UIManager.Instance.SetAnswerButton(idx, q.answers[i], () => OnAnswer(idx));
+            //populates the answer buttons
+            int answerid = i;
+            UIManager.Instance.SetAnswerButton(answerid, q.answers[i], () => OnAnswer(answerid));
         }
 
         questionTimeLeft = timePerQuestion;
         waiting = true;
     }
 
-    void OnAnswer(int idx)
+    void OnAnswer(int answerid)
     {
+        //defines what happens when answer buttons are clicked
         if (!waiting) return;
         waiting = false;
 
-        bool correct = idx == questions[currentQuestionIndex].correctAnswerIndex;
+        bool correct = answerid == questions[currentQuestionIndex].correctAnswerIndex;
         if (correct)
         {
             correctCount++;
@@ -138,6 +141,7 @@ public class Quiz : MonoBehaviour
 
     if (questionTimeLeft <= 0f)
     {
+
         waiting = false;
         incorrectCount++;
         UIManager.Instance.ShowIncorrectFeedback(1f);
@@ -148,28 +152,35 @@ public class Quiz : MonoBehaviour
 
     void EndQuiz()
     {
+       
         started = false;
         UIManager.Instance.HideQuizWindow();
         GameManager.Instance.player.enableInput();
 
         ScoreManager.Instance.StoreScore(gameObject.name, correctCount, incorrectCount);
-        if (AudioManager.instance != null)
-        {
-            AudioManager.instance.GraduallySlowDownMusic(normalMusicSpeed, 2f); // Slow down over 2 seconds
-        }
+        
 
         if (correctCount == questions.Count)
         {
+            
             float saved = Mathf.Max(0f, questions.Count * timePerQuestion - totalTimeUsed);
-            int bonus = Mathf.RoundToInt(saved) * pointsPerSavedSecond;
+            int bonus = Mathf.RoundToInt(saved) * pointsPerSavedSecond; //bonus calculated based on the time left
             ScoreManager.Instance.addOverallScore(bonus);
             ObjectiveManager.Instance?.CompleteQuizObjective();
             UIManager.Instance.ShowAlert($"Quiz passed!\nBonus +{bonus} pts", 4f);
             Iscomplete = true;
             UIManager.Instance.HideQuizWindow();
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.GraduallySlowDownMusic(normalMusicSpeed, 1f);
+            }
         }
         else
         {
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.GraduallySlowDownMusic(normalMusicSpeed, 2f);
+            }
             UIManager.Instance.ShowAlert($"Quiz failed.\n<color=green>Correct: {correctCount}</color>\n<color=red>Incorrect: {incorrectCount}</color>", 4f);
         }
 

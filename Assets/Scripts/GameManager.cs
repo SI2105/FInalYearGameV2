@@ -12,9 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public string PlayerName;
     public bool gameCompleted = false;
 
-    //[Header("Leaderboard Panel")]
-    //[SerializeField] private GameObject leaderboardPanel;
-    //[SerializeField] private TMP_Text leaderboardScoreText;
+
 
     private void Awake()
     {
@@ -45,8 +43,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-        // Call this method when the final dialogue is completed.
-        public void GameCompleted()
+       
+     public void GameCompleted()
     {
         gameCompleted = true;
         UIManager.Instance.ShowEndGameWindow();

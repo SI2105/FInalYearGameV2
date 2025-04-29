@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
+    //acts as the trigger between player and the NPC and manages the interactions
     public Dialogue dialogue;
     private bool playerDetected;
     public int objectiveIndex;

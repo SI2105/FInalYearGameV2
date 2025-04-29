@@ -16,11 +16,8 @@ public class Dialogue : MonoBehaviour
     private int charIndex;
     
     private bool started;
-   
     private bool waitForNext;
-
     private bool skipWriting;
-
 
 
 
@@ -59,10 +56,8 @@ public class Dialogue : MonoBehaviour
       
         index = i;
 
-        // Reset the character index
         charIndex = 0;
 
-        //Clears the quiz text through UIManager
         UIManager.Instance.ClearDialogueText();
 
         skipWriting = false;
@@ -70,13 +65,11 @@ public class Dialogue : MonoBehaviour
         
     }
 
-    // End Dialogue
     public void EndDialogue()
     {
-        // Started is disabled
+     
         started = false;
 
-        // Disable wait for next as well
         waitForNext = false;
 
         StopAllCoroutines();
@@ -89,17 +82,17 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    // Writing logic
+    //writing animation logic
     IEnumerator Writing()
     {
         string currentDialogue = dialogues[index];
 
-        // Continue writing characters until the end
+        
         while (charIndex < currentDialogue.Length)
         {
             if (skipWriting)
             {
-                // Skip rest of typing: display full dialogue immediately
+                //checks if writing animation is being skipped
                 UIManager.Instance.dialogueText.text = currentDialogue;
                 charIndex = currentDialogue.Length;
                 
@@ -113,7 +106,6 @@ public class Dialogue : MonoBehaviour
             yield return new WaitForSeconds(writingSpeed);
         }
 
-        // Once complete, allow moving to the next dialogue line
         waitForNext = true;
         UIManager.Instance.ShowEnter();
     }
@@ -128,13 +120,12 @@ public class Dialogue : MonoBehaviour
             
             if (!waitForNext)
             {
-                //If text is still being written, skip to full text
+                //handles dialogue writing animation skip
                 skipWriting = true;
                 AudioManager.instance.PlaySFX(AudioManager.instance.click);
             }
             else
             {
-                // Otherwise, move to the next dialogue
                 waitForNext = false;
                 index++;
                 if (index < dialogues.Count)

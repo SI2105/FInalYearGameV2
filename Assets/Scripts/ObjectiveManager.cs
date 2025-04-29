@@ -21,11 +21,10 @@ public class ObjectiveManager : MonoBehaviour
     [Header("Sections (In Order)")]
     [SerializeField] private List<Section> sections = new List<Section>();
 
-    //public int currentSection { get; private set; } = 0;
-    //dev code
+    
     public int currentSection;
 
-    //above is dev code
+   
     public bool dialogueCompleted { get; private set; }  = false;
     public bool quizCompleted { get; private set; }  = false;
 

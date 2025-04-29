@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource sfxSource;
 
+    //audio clips
     public AudioClip background;
     public AudioClip click;
     public AudioClip toggle;
