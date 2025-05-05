@@ -1,13 +1,16 @@
-# SkillsCity - Final Year Project - Sakibul Islam
-Playable at: https://si2105.github.io/FInalYearGameV2/v1.0/
+# SkillsCity - Sakibul Islam - Adapting an IBM SkillsBuild MOOC into an RPG Game
+## Contents & Running the game
+The following repository contains the Unity project for the game. The builds for the game are contained in docs/ folders and Assets/ contains the game assets, including the code under Assets/Scripts/. 
+As it is a web-based game, there is no executable. Instead, GitHub pages is utilised to directly deploy the contents of the docs/ folder under the GitHub pages instance of this repository. 
 
-SkillsCity is a Gamified learning experience that takes the common game elements from RPG games and combines them with content from the Massive Open Online Course (MOOC) platform IBM SkillsBuild
+The game is playable at: https://si2105.github.io/FInalYearGameV2/v1.0/
+
+## Description
+SkillsCity is a Gamified learning experience that takes the common game elements from RPG games and combines them with content from the Massive Open Online Course (MOOC) platform IBM SkillsBuild.
 
 ## Credits for assets
 - https://muchopixels.itch.io/city-street-tileset-pack - Tileset
 - https://limezu.itch.io/moderninteriors - Character and Object sprites 
-
-
 
 - https://opengameart.org/content/10-basic-message-boxes ChatBox asset- CharlesGabriel
 
